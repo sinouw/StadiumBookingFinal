@@ -1,0 +1,58 @@
+<ng-container *ngIf="pageTitle">
+
+    <embryo-PageTitle heading="{{pageTitle}}" subHeading="{{subPageTitle}}"></embryo-PageTitle>
+
+
+    <div class="inner-container section-gap">
+        <div class="container">
+            <!-- Products with free api key  -->
+            <ais-instantsearch [config]="{
+            appId: 'ZJ5YQA6729',
+            apiKey: '6ad85261105ca3669fe68e68e7f3038c',
+            indexName: 'ClubFoot'
+            }">
+                <div fxLayout="row wrap" class="col-gap">
+                    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="35" fxFlex.lg="25" fxFlex.xl="25">
+                        <div class="mat-card mb-4">
+                            <ais-search-box placeholder="Search a club"></ais-search-box>
+                        </div>
+                    </div>
+
+                    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="75" fxFlex.xl="75"
+                        class="algolia-main-list">
+                        <ais-stats>
+                            <ng-template let-state="state">
+                                <div *ngIf="state.nbHits > 0">
+                                    <span role="img" aria-label="emoji">⚡️</span>
+                                    <strong>{{state.nbHits}}</strong>
+                                    results found
+                                    <span *ngIf="state.query.trim().length > 0">
+                                        for
+                                        <strong>"{{state.query.trim()}}"</strong>
+                                    </span>
+                                    in
+                                    <strong>{{state.processingTimeMS}}ms</strong>
+                                </div>
+                            </ng-template>
+                        </ais-stats>
+
+
+                        <ais-hits [transformItems]="transformHits">
+                            <ng-template let-hits="hits" let-results="results">
+                                <ng-container *ngIf="(hits && hits.length>0); else errorBlock">
+                                    <app-club-grid [clubs]="hits" gridThree=true>
+                                    </app-club-grid>
+                                </ng-container>
+                                <ng-template #errorBlock>
+                                    No Product Found.
+                                </ng-template>
+                            </ng-template>
+                        </ais-hits>
+
+                        <ais-pagination></ais-pagination>
+                    </div>
+                </div>
+            </ais-instantsearch>
+        </div>
+    </div>
+</ng-container>

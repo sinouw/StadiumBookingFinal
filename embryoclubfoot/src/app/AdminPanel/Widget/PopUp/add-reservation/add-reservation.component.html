@@ -1,0 +1,58 @@
+<form [formGroup]="addReservationForm" class="popup-card-width add-new-user">
+    <div>
+        <h2 mat-dialog-title>Add New Reservation</h2>
+    </div>
+    <mat-dialog-content class="mb-4">
+        <div>
+            <div>
+                <mat-form-field class="w-100">
+                    <select matNativeControl formControlName="IdClient" placeholder="Client UserName">
+                        <option *ngFor="let client of clients" [value]="client.Id" >{{ client?.UserName }}</option>
+                    </select >
+                    <mat-error *ngIf="addReservationForm.controls['IdClient'].touched && !addReservationForm.controls['IdClient'].valid">
+                        <mat-error *ngIf="addReservationForm.controls['IdClient'].hasError('required')" class="required alert-error">
+                            You must Select a Client Name.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <select matNativeControl formControlName="IdClub" placeholder="Club Name" (change)="getTerrains()">
+                        <option *ngFor="let club of clubs" [value]="club.IdClub" >{{ club?.Name }}</option>
+                    </select >
+                    <mat-error *ngIf="addReservationForm.controls['IdClub'].touched && !addReservationForm.controls['IdClub'].valid">
+                        <mat-error *ngIf="addReservationForm.controls['IdClub'].hasError('required')" class="required alert-error">
+                            You must Select a Club Name.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                        <select matNativeControl formControlName="IdTerrain" placeholder="Terrain Name">
+                            <option *ngFor="let terrain of terrains" [value]="terrain.IdTerrain">{{ terrain?.Name }}</option>
+                        </select >
+                        <mat-error *ngIf="addReservationForm.controls['IdTerrain'].touched && !addReservationForm.controls['IdTerrain'].valid">
+                            <mat-error *ngIf="addReservationForm.controls['IdTerrain'].hasError('required')" class="required alert-error">
+                                You must Select a Terrain Name.
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input matInput type="datetime-local" placeholder="Starting Time" formControlName="StartReservation">
+                    <mat-error *ngIf="addReservationForm.get('StartReservation').hasError('required') && addReservationForm.get('StartReservation').touched">This field should not be empty.</mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <input matInput type="datetime-local" placeholder="Ending Time" formControlName="EndReservation">
+                    <mat-error *ngIf="addReservationForm.get('EndReservation').hasError('required') && addReservationForm.get('EndReservation').touched">This field should not be empty.</mat-error>
+                </mat-form-field>
+               
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="m-0">
+        <button type="button" mat-raised-button (click)="dialogRef.close()" color="primary">CLOSE</button>
+        <button (click)="onFormSubmit()" type="submit" [disabled]="!addReservationForm.valid" mat-raised-button color="warn">SUBMIT</button>
+    </mat-dialog-actions>
+</form>
+<!-- add-new-Reservation -->

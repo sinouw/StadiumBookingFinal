@@ -1,0 +1,73 @@
+<form [formGroup]="addTerrainForm" class="popup-card-width add-new-user">
+    <div>
+        <h2 mat-dialog-title>Add New Terrain</h2>
+    </div>
+    <mat-dialog-content class="mb-4">
+        <div>
+            <div>
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Name" class="form-control" placeholder="Name">
+                    <mat-error *ngIf="addTerrainForm.controls['Name'].touched && !addTerrainForm.controls['Name'].valid">
+                        <mat-error *ngIf="addTerrainForm.controls['Name'].hasError('required')" class="required alert-error">
+                            You must include a Name.
+                        </mat-error>
+                        <mat-error *ngIf="addTerrainForm.get('Name').hasError('pattern') && addTerrainForm.get('Name').touched">
+                            Please enter a valid Name without space.</mat-error>
+
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Type" class="form-control" placeholder="Type">
+                    <mat-error *ngIf="addTerrainForm.controls['Type'].touched && !addTerrainForm.controls['Type'].valid">
+                        <mat-error *ngIf="addTerrainForm.controls['Type'].hasError('required')" class="required alert-error">
+                            You must include a Type.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Price" class="form-control" placeholder="Price">
+                    <mat-error *ngIf="addTerrainForm.controls['Price'].touched && !addTerrainForm.controls['Price'].valid">
+                        <mat-error *ngIf="addTerrainForm.controls['Price'].hasError('required')" class="required alert-error">
+                            You must include a Price.
+                        </mat-error>
+                        <mat-error *ngIf="addTerrainForm.get('Price').hasError('pattern') && addTerrainForm.get('Price').touched">
+                            Please enter a valid Price.</mat-error>
+
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <select matNativeControl formControlName="Free" placeholder="Terrain Status">
+                        <option value="True">Free</option>
+                        <option value="false">Not Free</option>
+                    </select>
+                    <mat-error *ngIf="addTerrainForm.controls['Free'].touched && !addTerrainForm.controls['Free'].valid">
+                        <mat-error *ngIf="addTerrainForm.controls['Free'].hasError('required')" class="required alert-error">
+                            You must Select a Free Status.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100" *ngIf="service.ClubID==null">
+                    <select matNativeControl formControlName="IdClub" placeholder="Club List">
+                        <option *ngFor="let club of clubs" [value]="club.IdClub">{{ club.Name }}</option>
+
+                    </select>
+                    <mat-error *ngIf="addTerrainForm.controls['IdClub'].touched && !addTerrainForm.controls['IdClub'].valid">
+                        <mat-error *ngIf="addTerrainForm.controls['IdClub'].hasError('required')" class="required alert-error">
+                            You must Select a Club.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="m-0">
+        <button type="button" mat-raised-button (click)="dialogRef.close()" color="primary">CLOSE</button>
+        <button (click)="onFormSubmit()" type="submit" [disabled]="!addTerrainForm.valid" mat-raised-button color="warn">SUBMIT</button>
+    </mat-dialog-actions>
+</form>
+<!-- add-new-terrain -->

@@ -1,0 +1,128 @@
+<!-- Grid OR List Start -->
+<div class="m-3" fxLayoutAlign="space-between center">
+    <div class="title">
+        <!-- <h5 class="mb-0">{{'Stadiums' | translate }} {{showType | translate}}</h5> -->
+    </div>
+    <!-- title -->
+    <div class="product-icon">
+        <button id="list" class="active" mat-icon-button (click)="terrainShowType('list')">
+            <mat-icon>list</mat-icon>
+        </button>
+        <button id="grid" mat-icon-button (click)="terrainShowType('grid')">
+            <mat-icon>apps</mat-icon>
+        </button>
+    </div>
+    <!-- product-icon -->
+</div>
+<!-- Grid OR List End -->
+<ng-container *ngIf="terrainsGrid && terrainsGrid.length >= 0; else elseBlock">
+    <ng-container *ngIf="showType == 'list';else gridtype">
+        <div fxLayout="row wrap">
+            <div fxFlex.gt-md="100" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                <div class="product-list">
+                    <mat-card class="pt-0">
+                        <div class="overflow-hidden">
+                            <div class="table-responsive-x product-list-table">
+                                <table class="w-100 table-scroll-wrap" mat-table [dataSource]="terrainsList" matSort>
+
+                                    <ng-container matColumnDef="Name">
+                                        <th class="text-nowrap px-3" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            Name</th>
+                                        <td class="text-nowrap product-name" mat-cell *matCellDef="let element">
+                                            <span>{{element.Name}}</span></td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Free">
+                                        <th class="text-nowrap px-3" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            Free</th>
+                                        <td class="text-nowrap product-name" mat-cell *matCellDef="let element">
+                                            <span>{{element.Free}}</span></td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Type">
+                                        <th class="text-nowrap px-3" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            Type</th>
+                                        <td class="text-nowrap product-name" mat-cell *matCellDef="let element">
+                                            <span>{{element.Type}}</span></td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Price">
+                                        <th class="text-nowrap px-3" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            Price</th>
+                                        <td class="text-nowrap product-name" mat-cell *matCellDef="let element">
+                                            <span>{{element.Price}}</span></td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ClubName">
+                                        <th class="text-nowrap px-3" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                            Club Name</th>
+                                        <td class="text-nowrap product-name" mat-cell *matCellDef="let element">
+                                            <span>{{element.club.Name}}</span></td>
+                                    </ng-container>
+
+
+
+                                    <ng-container matColumnDef="Action">
+                                        <th class="px-3 text-nowrap" mat-header-cell *matHeaderCellDef> Action </th>
+                                        <td class="px-3 text-nowrap" mat-cell *matCellDef="let element;let i = index;">
+                                            <button mat-icon-button (click)="TerrainDetail(element,i)" color="primary">
+                                                <i class="material-icons">bookmark</i>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedTerrainColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedTerrainColumns"></tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- product-list-tabel-->
+                        <mat-paginator [pageSizeOptions]="[15, 30, 45, 60]"></mat-paginator>
+                    </mat-card>
+                </div>
+                <!-- product-list-->
+            </div>
+        </div>
+    </ng-container>
+
+</ng-container>
+<ng-template #gridtype>
+    <div class="container">
+        <div fxLayout="row wrap" class=" col-gap" fxLayoutAlign="start stretch" *ngIf="terrainsGrid && terrainsGrid.length>0">
+            <div fxFlex.gt-md="25" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100" *ngFor="let terrain of terrainsGrid; let i=index;">
+                <mat-card class="product-card">
+                    <a class="p-link">
+                        <img width="626" height="800" mat-card-image src="https://t4.ftcdn.net/jpg/01/82/35/11/240_F_182351193_5mOBsDX7ntLaGixDlIFIJ8LeaJemGLAC.jpg" alt="Photo of a Shiba Inu">
+                    </a>
+                    <div class="wishlist-icon">
+                        <a>
+                            <mat-icon> delete </mat-icon>
+                        </a>
+                    </div>
+                    <!-- wishlist-icon-->
+                    <mat-card-content class="product-content relative">
+                        <h5><a class="title-link">{{terrain?.Name}}</a> </h5>
+                        <p class="category-wrap mb-2">{{terrain?.Free}}</p>
+                        <p class="category-wrap mb-2">{{terrain?.Type}}</p>
+                        <!-- <p class="category-wrap mb-2">{{club?.Price}}</p> -->
+                        <div class="product-price">
+                            <div fxFlex fxLayoutAlign="space-between">
+                                <h6 class="accent-color">{{terrain?.Price | currency}}</h6>
+                            </div>
+                        </div>
+                        <!--product-price-->
+                        <div class="m-icon">
+                            <button mat-fab (click)="TerrainDetail(terrain,i)"><i class="material-icons">bookmark</i></button>
+                        </div>
+                        <!-- m-icon -->
+                    </mat-card-content>
+                    <!-- product-content -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #elseBlock>
+    <h5 class="ml-5">No Terrain found</h5>
+</ng-template>

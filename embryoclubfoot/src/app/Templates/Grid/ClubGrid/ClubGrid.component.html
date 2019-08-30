@@ -1,0 +1,83 @@
+<div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap" *ngIf="clubs && clubs.length > 0">
+    <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="{{lg}}" fxFlex.xl="{{xl}}"
+        *ngFor="let club of clubs; let i=index; trackBy: trackByObjectID">
+        <mat-card class="product-card" *ngIf="gridLength && (i<gridLength)">
+            <a class="p-link" [routerLink]="['/client/terrains', club?.objectID]">
+                <img width="626" height="800" mat-card-image
+                    src="https://t4.ftcdn.net/jpg/01/82/35/11/240_F_182351193_5mOBsDX7ntLaGixDlIFIJ8LeaJemGLAC.jpg"
+                    alt="Photo of a Shiba Inu">
+            </a>
+            <div class="wishlist-icon {{i}}-wishlist" id="{{i}}-wishlist">
+                <a (click)="productAddToWishlist(club, i+'-wishlist')"><i class="material-icons"> favorite </i></a>
+            </div>
+            <mat-card-content class="product-content relative">
+                <h5><a [routerLink]="['/client/terrains', club?.objectID]" class="title-link">{{club?.name}}</a> </h5>
+                <div>
+                    <div fxFlex fxLayoutAlign="space-between">
+
+
+                        <h6 class="accent-color">{{club?.name }}</h6>
+                        <div class="rating-star">
+                            <embryo-Rating [rate]="5"></embryo-Rating>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-icon" *ngIf="checkCartAlready(club)">
+                    <!-- <embryo-AddToCardButton [club]="club" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton> -->
+                </div>
+                <div class="m-icon" *ngIf="!checkCartAlready(club)">
+                    <button mat-fab [routerLink]="['/client/terrains', club?.objectID]"><i
+                            class="material-icons">remove_red_eye</i> </button>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Multiple show clubs grid -->
+        <mat-card class="product-card" *ngIf="!gridLength">
+            <a class="p-link" *ngIf="club?.id" [routerLink]="['/client/terrains', club?.objectID]">
+                <img width="626" height="800" mat-card-image
+                    src="https://t4.ftcdn.net/jpg/01/82/35/11/240_F_182351193_5mOBsDX7ntLaGixDlIFIJ8LeaJemGLAC.jpg"
+                    alt="Photo">
+            </a>
+            <a class="p-link" *ngIf="!club?.id" [routerLink]="['/clubs/accessories/17']">
+                <img width="626" height="800" mat-card-image
+                    src="https://t4.ftcdn.net/jpg/01/82/35/11/240_F_182351193_5mOBsDX7ntLaGixDlIFIJ8LeaJemGLAC.jpg"
+                    [ngClass]="{ transparent: !loaded }" (load)="onLoad()" alt="Photo">
+            </a>
+            <div class="wishlist-icon {{i}}-wishlist" id="{{i}}-wishlist">
+                <a (click)="productAddToWishlist(club, i+'-wishlist')"><i class="material-icons"> favorite </i></a>
+            </div>
+            <mat-card-content class="product-content relative">
+                <h5><a *ngIf="club?.id" [routerLink]="['/client/terrains', club?.objectID]"
+                        class="title-link">{{club?.name}}</a> </h5>
+                <!-- <h5><a *ngIf="!club?.id" [routerLink]="['/clubs/accessories/17']" class="title-link">{{club?.name}}</a> </h5> -->
+                <div>
+                    <div fxFlex fxLayoutAlign="space-between">
+                        <h6 class="accent-color">{{club?.name }}</h6>
+                        <p>{{ club?.Phone }}</p>
+                        <!-- <p>{{ club?.openingTime }} - {{ club?.closingTime }} </p> -->
+                        <div class="rating-star">
+                            <embryo-Rating [rate]="5"></embryo-Rating>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div>
+                    <p> {{ club?.openingTime }} - {{ club?.closingTime }} </p>
+                </div>
+                <div class="m-icon" *ngIf="checkCartAlready(club)">
+                    <!-- <embryo-AddToCardButton [club]="club" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton> -->
+                </div>
+                <div class="m-icon">
+                    <button mat-fab *ngIf="club" [routerLink]="['/client/terrains', club?.objectID]"><i
+                            class="material-icons">remove_red_eye</i> </button>
+                    <button mat-fab *ngIf="!club" [routerLink]="['/clubs/accessories/17']"><i
+                            class="material-icons">remove_red_eye</i> </button>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

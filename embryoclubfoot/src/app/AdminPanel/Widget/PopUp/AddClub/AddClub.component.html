@@ -1,0 +1,114 @@
+<form [formGroup]="addClubForm" class="popup-card-width add-new-user">
+    <div>
+        <h2 mat-dialog-title>Add New Club</h2>
+    </div>
+    <mat-dialog-content class="mb-4">
+        <div>
+            <div>
+
+                <mat-form-field class="w-100">
+                    <select matNativeControl formControlName="ClubAdminId" placeholder="ClubAdmin UserName">
+                                <option *ngFor="let clubadmin of clubadmins" [value]="clubadmin.Id" >{{ clubadmin?.UserName }}</option>
+                            </select >
+                            <mat-error *ngIf="addClubForm.controls['ClubAdminId'].touched && !addClubForm.controls['ClubAdminId'].valid">
+                                <mat-error *ngIf="addClubForm.controls['ClubAdminId'].hasError('required')" class="required alert-error">
+                                    You must Select a Client Name.
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>
+
+
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Name" class="form-control" placeholder="Name">
+                    <mat-error *ngIf="addClubForm.controls['Name'].touched && !addClubForm.controls['Name'].valid">
+                        <mat-error *ngIf="addClubForm.controls['Name'].hasError('required')" class="required alert-error">
+                            You must include a Name.
+                        </mat-error>
+                        <mat-error *ngIf="addClubForm.get('Name').hasError('pattern') && addClubForm.get('Name').touched">
+                            Please enter a valid Name without space.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Address" class="form-control" placeholder="Address">
+                    <mat-error *ngIf="addClubForm.controls['Address'].touched && !addClubForm.controls['Address'].valid">
+                        <mat-error *ngIf="addClubForm.controls['Address'].hasError('required')" class="required alert-error">
+                            You must include a Address.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                        <select matNativeControl formControlName="City" placeholder="City">
+                            <option *ngFor="let city of cities">{{city}}</option>
+                        </select>
+                    <mat-error *ngIf="addClubForm.controls['City'].touched && !addClubForm.controls['City'].valid">
+                        <mat-error *ngIf="addClubForm.controls['City'].hasError('required')" class="required alert-error">
+                            You must Select a Club Status.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Phone" class="form-control" placeholder="Phone">
+                    <mat-error *ngIf="addClubForm.controls['Phone'].touched && !addClubForm.controls['Phone'].valid">
+                        <mat-error *ngIf="addClubForm.controls['Phone'].hasError('required')" class="required alert-error">
+                            You must include a Phone.
+                        </mat-error>
+                        <mat-error *ngIf="addClubForm.get('Phone').hasError('pattern') && addClubForm.get('Phone').touched">
+                            Please enter a valid Phone Number.</mat-error>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="Email" class="form-control" placeholder="Email">
+                    <mat-error *ngIf="addClubForm.controls['Email'].touched && !addClubForm.controls['Email'].valid">
+                        <mat-error *ngIf="addClubForm.controls['Email'].hasError('required')" class="required alert-error">
+                            You must include a E-mail Address.
+                        </mat-error>
+                        <mat-error *ngIf="addClubForm.controls['Email'].hasError('pattern')">
+                            E-mail must be valid
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+
+                    <input matInput type="time" placeholder="Opening Time" formControlName="OpeningTime">
+                    <mat-error *ngIf="addClubForm.get('OpeningTime').hasError('required') && addClubForm.get('OpeningTime').touched">
+                        This field should not be empty.</mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <input matInput type="time" placeholder="Closing Time" formControlName="ClosingTime">
+                    <mat-error *ngIf="addClubForm.get('ClosingTime').hasError('required') && addClubForm.get('ClosingTime').touched">
+                        This field should not be empty.</mat-error>
+
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <select matNativeControl formControlName="IsActive" placeholder="Club Status">
+                        <option value="True">Active</option>
+                        <option value="false">Not Active</option>
+                    </select>
+                    <mat-error *ngIf="addClubForm.controls['IsActive'].touched && !addClubForm.controls['IsActive'].valid">
+                        <mat-error *ngIf="addClubForm.controls['IsActive'].hasError('required')" class="required alert-error">
+                            You must Select a Club Status.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="lat" class="form-control" placeholder="lattitude">
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input matInput type="text" formControlName="lng" class="form-control" placeholder="langitude">
+                </mat-form-field>
+
+
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="m-0">
+        <button type="button" mat-raised-button (click)="dialogRef.close()" color="primary">CLOSE</button>
+        <button (click)="onFormSubmit()" type="submit" [disabled]="!addClubForm.valid" mat-raised-button color="warn">SUBMIT</button>
+    </mat-dialog-actions>
+</form>
+<!-- add-new-club -->

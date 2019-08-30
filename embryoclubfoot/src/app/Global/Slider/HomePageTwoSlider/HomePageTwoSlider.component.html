@@ -1,0 +1,101 @@
+<!-- <div class="section-gap pt-3 pb-0">
+<ngx-slick-carousel class="carousel home-2-slider" [config]="slideConfig">
+  <div ngxSlickItem *ngFor="let slide of slides">
+    <div class="relative">
+      <img [src]="slide.img" alt="" width="100%">
+      <div class="home-2-slider-content">
+        <div [innerHTML]="slide?.content"></div>
+        <button color="accent" mat-raised-button [routerLink]="['/products']">Shop Now</button>
+      </div>
+   </div>
+  </div>
+</ngx-slick-carousel>
+</div> -->
+
+<div class="jumbtron card-header">
+    <h1 class="display-4 text-center">Club's Map</h1>
+</div>
+<!-- <hr> -->
+<div class="row">
+    <div style="padding: 10px 30px">
+        <div hidden>
+            Start
+            <input type="text" [(ngModel)]="start" />
+        </div>
+        <table [ngStyle]="{'margin-top': '10px'}">
+            <tr>
+                <td>
+                    My Position
+                </td>
+
+                <td>
+                    <input type="text" [(ngModel)]="query" list="cities" autocomplete=off>
+                    <datalist id="cities">
+                                  <option>Ariana</option>
+                                  <option>Manouba</option>
+                                  <option>La marsa</option>
+                                  <option>Soukra</option>
+                                  <option>Taieb Mhiri</option>
+                                  <option>Ain zaghouan</option>
+                                  <option>Beb Alioua</option>
+                                  <option>Beb Souika</option>
+                                  <option>Fouchana</option>
+                                  <option>El Mourouj</option>
+                                  <option>Rades</option>
+                                  <option>El Zahra</option>
+                                  </datalist>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-secondary" (click)="getAddress()">Search Your City <i class="fas fa-search-location"></i></button>
+                </td>
+            </tr>
+            <br>
+        </table>
+        <!-- <div hidden>
+          <input type="text" [(ngModel)]="position">
+          <button type="button" (click)="getAddressFromLatLng()">Search</button>
+      </div> -->
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row" style="padding: 10px 20px">
+        Distance : {{distance}} {{unit}} | Duration : {{duration}} {{tunit}}
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-5">
+            <button class="btn btn-outline-secondary" (click)="modeType('Walk')" [ngClass]="{clicked: choice=='pedestrian'}">Walk <i class="fas fa-walking"></i></button>
+            <button class="btn btn-outline-secondary" (click)="modeType('Bicycle')" [ngClass]="{clicked: choice=='bicycle'}">Bicycle <i class="fas fa-bicycle"></i></button>
+            <button class="btn btn-outline-secondary" (click)="modeType('Car')" [ngClass]="{clicked: choice=='car'}">Car
+              <i class="fas fa-car-side"></i></button>
+        </div>
+        <div class="col-sm-7">
+            <button class="btn btn-outline-secondary" (click)="setPosition()" [ngClass]="{clicked: choosing}">Set
+              Position <i class="fas fa-map-marker-alt"></i></button> &nbsp;
+            <button class="btn btn-outline-secondary" (click)="userGeolocation()" [ngClass]="{clicked: choosing}">Auto
+              Geolocation <i class="fas fa-map-marker-alt"></i></button>
+        </div>
+    </div>
+
+    <div class="row" class="map">
+        <div #map [style.width]="width" [style.height]="height" style="float: left"></div>
+        <ol style="float: left; background-color: #FFF; width: 35%; min-height: 530px; margin-left: 20px; margin-top: 0;" class="card">
+            <li *ngFor="let direction of directions">
+                <p [innerHTML]="direction.instruction"></p>
+            </li>
+        </ol>
+        <div class="card" style="background-color: #FFF; width: 35%; min-height: 530px; margin-left: 20px; margin-top: 0;" *ngIf="NameCard != '' && AddressCard !='' ">
+            <div class="card-body">
+                <h5 class="card-title">Name: </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ NameCard }}</h6>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Address: </h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ AddressCard }}</h6>
+            </div>
+            <div class="card-body">
+                <button mat-raised-button (click)="viewTerrain(IdClub)" color="accent" class="button-lg" type="submit">View Terrain</button>
+            </div>
+        </div>
+    </div>
+</div>

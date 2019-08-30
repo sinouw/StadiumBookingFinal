@@ -1,0 +1,91 @@
+<form [formGroup]="form" (ngSubmit)="updateClub()">
+    <div class="product-detail-page section-gap">
+        <div class="container">
+            <div fxLayout='row wrap' fxLayoutAlign="center center" class="col-gap">
+                <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=90 fxFlex.lg="80" fxFlex.xl="90">
+                    <div fxLayout='row wrap' class="col-gap position-relative">
+                        <!-- image -->
+                        <!-- image -->
+                        <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=50 fxFlex.lg="50" fxFlex.xl="50">
+                            <div class="product-detail-content ml-3">
+                                <a class="primary-color font-medium" href="javascript:void(0)" (click)="backClicked()">Back to clubs</a>
+                                <h3 class="edit-text"><input matInput formControlName="Name" type="text"></h3>
+                                <mat-error *ngIf="form.get('Name').hasError('required') && form.get('Name').touched">This field should not be empty.</mat-error>
+                                <mat-error *ngIf="form.get('Name').hasError('pattern') && form.get('Name').touched">Please enter a valid Name.</mat-error>
+                                <!-- club-detail -->
+                                <ul class="no-style mb-4">
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> Address </span>:
+                                        <input class="ml-2" matInput formControlName="Address" type="text">
+                                        <mat-error *ngIf="form.get('Address').hasError('required') && form.get('Address').touched">This field should not be empty.</mat-error>
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> Phone </span>:
+                                        <input class="ml-2" matInput formControlName="Phone" type="text">
+                                        <mat-error *ngIf="form.get('Phone').hasError('required') && form.get('Phone').touched">This field should not be empty.</mat-error>
+                                        <mat-error *ngIf="form.get('Phone').hasError('pattern') && form.get('Phone').touched">Please enter a valid Phone.</mat-error>
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium">Email</span>:
+                                        <input class="ml-2" matInput formControlName="Email" type="text">
+                                        <mat-error *ngIf="form.get('Email').hasError('required') && form.get('Email').touched">This field should not be empty.</mat-error>
+                                        <mat-error *ngIf="form.get('Email').hasError('pattern') && form.get('Email').touched">Please enter a valid Email without space.</mat-error>
+                                    </li>
+
+                                    <!-- -- -->
+                                    <!-- -- -->
+                                    <!-- -- -->
+
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> City </span>:
+                                        <select class="ml-2" matInput formControlName="City" type="text">
+                                            <option *ngFor="let city of cities">{{city}}</option>
+                                        </select>
+                                        <!-- <mat-error *ngIf="form.get('City').hasError('required') && form.get('City').touched">This field should not be empty.</mat-error> -->
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> Lattitude </span>:
+                                        <input class="ml-2" matInput formControlName="lat" type="text">
+                                        <!-- <mat-error *ngIf="form.get('lat').hasError('required') && form.get('lat').touched">This field should not be empty.</mat-error> -->
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> Longitude </span>:
+                                        <input class="ml-2" matInput formControlName="lng" type="text">
+                                        <!-- <mat-error *ngIf="form.get('lng').hasError('required') && form.get('lng').touched">This field should not be empty.</mat-error> -->
+                                    </li>
+                                    <!-- -- -->
+                                    <!-- -- -->
+                                    <!-- -- -->
+
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium">Opening Time</span>:
+                                        <input type="time" placeholder="Opening Time" formControlName="OpeningTime">
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium">Closing Time</span>:
+                                        <input type="time" placeholder="Closing Time" formControlName="ClosingTime">
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium">IsActive</span>:
+                                        <select matNativeControl formControlName="IsActive" placeholder="Club Status">
+                                            <option value="true">Active</option>
+                                            <option value="false">Not Active</option>
+                                        </select>
+                                        <mat-error *ngIf="form.get('IsActive').hasError('required') && form.get('IsActive').touched">This field should not be empty.</mat-error>
+
+                                    </li>
+
+                                </ul>
+                                <div class="mb-5 detail-btns">
+                                    <button mat-raised-button color="accent" class="button-lg mr-3">Save</button>
+                                </div>
+                            </div>
+                            <!-- club-detail-content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- club-detail-page -->
+</form>

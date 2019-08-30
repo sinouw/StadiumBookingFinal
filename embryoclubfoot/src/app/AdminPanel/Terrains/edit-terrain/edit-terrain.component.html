@@ -1,0 +1,58 @@
+<form [formGroup]="EditTerrainForm" (ngSubmit)="updateTerrain()">
+    <div class="product-detail-page section-gap">
+        <div class="container">
+            <div fxLayout='row wrap' fxLayoutAlign="center center" class="col-gap">
+                <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=90 fxFlex.lg="80" fxFlex.xl="90">
+                    <div fxLayout='row wrap' class="col-gap position-relative">
+                        <!-- image -->
+                        <!-- image -->
+                        <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=50 fxFlex.lg="50" fxFlex.xl="50">
+                            <div class="product-detail-content ml-3">
+                                <a class="primary-color font-medium" href="javascript:void(0)" (click)="backClicked()">Back to Terrains</a>
+                                <h3 class="edit-text"><input matInput formControlName="Name" type="text"></h3>
+                                <!-- <div class="product-detail-price">
+                            <h4 class="accent-color edit-text"><input matInput  formControlName="price" type="text"></h4>
+                         </div> -->
+                                <!-- Terrain-detail -->
+                                <ul class="no-style mb-4">
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> Name </span>:
+                                        <input class="ml-2" matInput formControlName="Name" type="text">
+                                        <mat-error *ngIf="EditTerrainForm.get('Name').hasError('required') && EditTerrainForm.get('Name').touched">This field should not be empty.</mat-error>
+                                        <mat-error *ngIf="EditTerrainForm.get('Name').hasError('pattern') && EditTerrainForm.get('Name').touched">Please enter a valid Name without space.</mat-error>
+
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium"> Type </span>:
+                                        <input class="ml-2" matInput formControlName="Type" type="text">
+                                        <mat-error *ngIf="EditTerrainForm.get('Type').hasError('required') && EditTerrainForm.get('Type').touched">This field should not be empty.</mat-error>
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium">Free</span>:
+                                        <select matNativeControl formControlName="Free" placeholder="Terrain Status">
+                                            <option value="true">Free</option>
+                                            <option value="false">Not Free</option>
+                                        </select>
+                                    </li>
+                                    <li class="edit-text" fxLayout="row wrap" fxLayoutAlign="start start">
+                                        <span class="font-medium">Price</span>:
+                                        <input class="ml-2" matInput formControlName="Price" type="text">
+                                        <mat-error *ngIf="EditTerrainForm.get('Price').hasError('required') && EditTerrainForm.get('Price').touched">This field should not be empty.</mat-error>
+                                        <mat-error *ngIf="EditTerrainForm.get('Price').hasError('pattern') && EditTerrainForm.get('Price').touched">Please enter a valid Price without space.</mat-error>
+                                    </li>
+
+                                </ul>
+                                <div class="mb-5 detail-btns">
+                                    <button mat-raised-button color="accent" class="button-lg mr-3">Save</button>
+                                    <!-- <button class="button-lg" mat-raised-button (click)="backClicked()">Discard</button> -->
+                                </div>
+                            </div>
+                            <!-- Terrain-detail-content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Terrain-detail-page -->
+</form>

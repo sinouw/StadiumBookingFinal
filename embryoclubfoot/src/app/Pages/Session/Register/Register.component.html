@@ -1,0 +1,58 @@
+<div class="inner-container bg-white section-gap-lg">
+    <div class="container">
+        <div fxLayout='row wrap' fxLayoutAlign="center center">
+            <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="80" fxFlex.lg="70" fxFlex.xl="70">
+                <div fxLayout='row wrap' fxLayoutAlign="center center">
+                    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
+                        <div class="form-img register-image">
+                        </div>
+                    </div>
+                    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
+                        <mat-card class="register-form form-margin">
+                            <h4>Enter your details</h4>
+                            <form [formGroup]="addNewUserForm">
+                                <div class="mb-4">
+                                    <mat-form-field class="w-100">
+                                        <input matInput type="text" formControlName="UserName" class="form-control" placeholder="UserName" autocomplete="off" required>
+                                    </mat-form-field>
+                                    <mat-form-field class="w-100">
+                                        <input matInput type="text" formControlName="FullName" class="form-control" placeholder="Full Name" autocomplete="off" required>
+                                    </mat-form-field>
+                                    <mat-form-field class="w-100">
+                                        <input matInput formControlName="PhoneNumber" class="form-control" placeholder="Phone Number" autocomplete="off" maxlength="12" required>
+                                    </mat-form-field>
+                                    <mat-form-field class="w-100">
+                                        <input matInput formControlName="Email" class="form-control" placeholder="Email" autocomplete="off" required>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="w-100">
+                                        <select matNativeControl formControlName="Gender" placeholder="Gender">
+                                <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                </select>
+                                        <mat-error *ngIf="addNewUserForm.controls['Gender'].touched && !addNewUserForm.controls['Gender'].valid">
+                                            <mat-error *ngIf="addNewUserForm.controls['Gender'].hasError('required')" class="required alert-error">
+                                                You must Select a Gender.
+                                            </mat-error>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="w-100">
+                                        <input matInput type="password" formControlName="Password" class="form-control" placeholder="Password" autocomplete="off" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="mb-4">
+                                    <mat-form-field class="w-100">
+                                        <input matInput type="password" formControlName="ConfirmPassword" class="form-control" placeholder="ConfirmPassword" autocomplete="off" required>
+                                    </mat-form-field>
+                                </div>
+                                <button color="accent" class="button-lg mb-3" mat-raised-button (click)="onFormSubmit()" type="submit" [disabled]="!addNewUserForm.valid">Submit</button>
+                                <div> Already have account? then <a class="accent-color" [routerLink]="['/session/signin']">Sign In</a></div>
+                            </form>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

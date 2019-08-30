@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* body {
+    background-color: rgb(31, 31, 31);
+} */
+
+
+/* 
+.H_ib_body {
+    width: 275px;
+} */
+
+
+/* 
+.map {
+    margin-top: 20px;
+} */
+
+.clicked {
+    background-color: #6c757d;
+    color: white;
+}

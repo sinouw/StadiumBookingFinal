@@ -1,0 +1,38 @@
+<!-- edit-Reservation -->
+<form [formGroup]="EditReservationForm" class="popup-card-width add-new-user">
+    <div>
+        <h2 mat-dialog-title>Edit Reservation</h2>
+    </div>
+    <mat-dialog-content class="mb-4">
+        <div>
+            <div>
+
+
+                <mat-form-field class="w-100">
+                    <input matInput type="datetime-local" placeholder="Starting Time" formControlName="StartReservation">
+                    <mat-error *ngIf="EditReservationForm.get('StartReservation').hasError('required') && EditReservationForm.get('StartReservation').touched">This field should not be empty.</mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <input matInput type="datetime-local" placeholder="Ending Time" formControlName="EndReservation">
+                    <mat-error *ngIf="EditReservationForm.get('EndReservation').hasError('required') && EditReservationForm.get('EndReservation').touched">This field should not be empty.</mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100">
+                    <select matNativeControl formControlName="status" placeholder="Reservation Status">
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <mat-error *ngIf="EditReservationForm.controls['status'].touched && !EditReservationForm.controls['status'].valid">
+                        <mat-error *ngIf="EditReservationForm.controls['status'].hasError('required')" class="required alert-error">
+                            You must Select a Reservation Status.
+                        </mat-error>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="m-0">
+        <button type="button" mat-raised-button (click)="dialogRef.close()" color="primary">CLOSE</button>
+        <button (click)="onFormSubmit()" type="submit" [disabled]="!EditReservationForm.valid" mat-raised-button color="warn">SUBMIT</button>
+    </mat-dialog-actions>
+</form>
+<!-- edit-Reservation -->
